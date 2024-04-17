@@ -1,18 +1,23 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class EmailList {
 
+    Set<String> emailListSet = new TreeSet<>();
+    String emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
+
+
     public void add(String email) {
-        // TODO: валидный формат email добавляется, email это строка, она быть может любой
-        // принять решение добавлять аргумент email или нет должен этот метод
+        if (!email.matches(emailRegex)) {
+            System.out.println(Main.WRONG_EMAIL_ANSWER);
+        } else if (emailListSet.contains(email.toLowerCase())) {
+            System.out.println("Данный email уже был добавлен ранее");
+        } else {
+            emailListSet.add(email.toLowerCase());
+            System.out.println("Email успешно добавлен");
+        }
     }
 
     public List<String> getSortedEmails() {
-        // TODO: возвращается сортированный список электронных адресов в алфавитном порядке
-        return new ArrayList<>();
+        return new ArrayList<>(emailListSet);
     }
-
 }
-
